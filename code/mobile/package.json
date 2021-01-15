@@ -1,5 +1,5 @@
 {
-  "name": "crate",
+  "name": "enclose",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -7,10 +7,12 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "log": "react-native log-android"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
+    "@react-native-community/toolbar-android": "0.1.0-rc.2",
     "axios": "^0.19.2",
     "gql-query-builder": "^3.3.0",
     "prop-types": "^15.7.2",

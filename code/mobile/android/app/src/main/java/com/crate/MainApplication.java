@@ -1,4 +1,4 @@
-package com.crate;
+package com.enclose;
 
 import android.app.Application;
 import android.content.Context;

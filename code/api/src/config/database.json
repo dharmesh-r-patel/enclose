@@ -1,18 +1,18 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
+    "username": "postgres",
+    "password": "8385963990",
     "database": "enclose",
     "host": "127.0.0.1",
-    "dialect": "mysql",
+    "dialect": "postgres",
     "seederStorage": "sequelize"
   },
   "production": {
-    "username": "root",
-    "password": null,
+    "username": "postgres",
+    "password": "8385963990",
     "database": "enclose",
     "host": "127.0.0.1",
-    "dialect": "mysql",
+    "dialect": "postgres",
     "seederStorage": "sequelize"
   }
 }
