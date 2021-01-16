@@ -39,7 +39,7 @@ export const routes = {
     path: 'crates',
     screen: Crates,
     navigationOptions: {
-      tabBarLabel: 'Crates',
+      tabBarLabel: 'Enclose',
       tabBarIcon: ({tintColor}) => (
         <Icon name={'shopping-basket'} size={font(23)} color={tintColor} />
       ),
