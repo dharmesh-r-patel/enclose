@@ -4,8 +4,8 @@
 import {
   SUBSCRIPTIONS_GET_LIST_BY_USER_REQUEST,
   SUBSCRIPTIONS_GET_LIST_BY_USER_RESPONSE,
-  SUBSCRIPTIONS_GET_LIST_BY_USER_FAILURE
-} from './actions'
+  SUBSCRIPTIONS_GET_LIST_BY_USER_FAILURE,
+} from './actions';
 
 // Subscriptions list by user
 
@@ -13,35 +13,38 @@ import {
 const subscriptionsByUserInitialState = {
   isLoading: false,
   error: null,
-  list: []
-}
+  list: [],
+};
 
 // State
-export const subscriptionsByUser = (state = subscriptionsByUserInitialState, action) => {
+export const subscriptionsByUser = (
+  state = subscriptionsByUserInitialState,
+  action,
+) => {
   switch (action.type) {
     case SUBSCRIPTIONS_GET_LIST_BY_USER_REQUEST:
       return {
         ...state,
         isLoading: action.isLoading,
-        error: null
-      }
+        error: null,
+      };
 
     case SUBSCRIPTIONS_GET_LIST_BY_USER_RESPONSE:
       return {
         ...state,
         isLoading: false,
         error: action.error,
-        list: action.list
-      }
+        list: action.list,
+      };
 
     case SUBSCRIPTIONS_GET_LIST_BY_USER_FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.error
-      }
+        error: action.error,
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};

@@ -1,13 +1,13 @@
 // App Imports
-import { MESSAGE_SHOW, MESSAGE_HIDE } from './actions'
+import {MESSAGE_SHOW, MESSAGE_HIDE} from './actions';
 
 // Initial State
 export const commonInitialState = {
   message: {
     text: null,
-    open: false
-  }
-}
+    open: false,
+  },
+};
 
 // State
 export default (state = commonInitialState, action) => {
@@ -17,20 +17,20 @@ export default (state = commonInitialState, action) => {
         ...state,
         message: {
           text: action.message,
-          open: true
-        }
-      }
+          open: true,
+        },
+      };
 
     case MESSAGE_HIDE:
       return {
         ...state,
         message: {
           text: null,
-          open: false
-        }
-      }
+          open: false,
+        },
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};

@@ -1,158 +1,183 @@
 // Imports
-import AsyncStorage from '@react-native-community/async-storage'
-import axios from 'axios'
-import { query } from 'gql-query-builder'
+import AsyncStorage from '@react-native-community/async-storage';
+import axios from 'axios';
+import {query} from 'gql-query-builder';
 
 // App Imports
-import { routeApi } from '../../../setup/routes'
+import {routeApi} from '../../../setup/routes';
 
 // Actions Types
-export const PRODUCTS_GET_LIST_REQUEST = 'PRODUCTS/GET_LIST_REQUEST'
-export const PRODUCTS_GET_LIST_RESPONSE = 'PRODUCTS/GET_LIST_RESPONSE'
-export const PRODUCTS_GET_LIST_FAILURE = 'PRODUCTS/GET_LIST_FAILURE'
-export const PRODUCTS_GET_LIST_RESET = 'PRODUCTS/GET_LIST_RESET'
-export const PRODUCTS_PRE_GET = 'PRODUCTS/PRE_GET'
-export const PRODUCTS_GET_REQUEST = 'PRODUCTS/GET_REQUEST'
-export const PRODUCTS_GET_RESPONSE = 'PRODUCTS/GET_RESPONSE'
-export const PRODUCTS_GET_FAILURE = 'PRODUCTS/GET_FAILURE'
-export const PRODUCTS_GET_RELATED_LIST_REQUEST = 'PRODUCTS/GET_RELATED_LIST_REQUEST'
-export const PRODUCTS_GET_RELATED_LIST_RESPONSE = 'PRODUCTS/GET_RELATED_LIST_RESPONSE'
-export const PRODUCTS_GET_RELATED_LIST_FAILURE = 'PRODUCTS/GET_RELATED_LIST_FAILURE'
+export const PRODUCTS_GET_LIST_REQUEST = 'PRODUCTS/GET_LIST_REQUEST';
+export const PRODUCTS_GET_LIST_RESPONSE = 'PRODUCTS/GET_LIST_RESPONSE';
+export const PRODUCTS_GET_LIST_FAILURE = 'PRODUCTS/GET_LIST_FAILURE';
+export const PRODUCTS_GET_LIST_RESET = 'PRODUCTS/GET_LIST_RESET';
+export const PRODUCTS_PRE_GET = 'PRODUCTS/PRE_GET';
+export const PRODUCTS_GET_REQUEST = 'PRODUCTS/GET_REQUEST';
+export const PRODUCTS_GET_RESPONSE = 'PRODUCTS/GET_RESPONSE';
+export const PRODUCTS_GET_FAILURE = 'PRODUCTS/GET_FAILURE';
+export const PRODUCTS_GET_RELATED_LIST_REQUEST =
+  'PRODUCTS/GET_RELATED_LIST_REQUEST';
+export const PRODUCTS_GET_RELATED_LIST_RESPONSE =
+  'PRODUCTS/GET_RELATED_LIST_RESPONSE';
+export const PRODUCTS_GET_RELATED_LIST_FAILURE =
+  'PRODUCTS/GET_RELATED_LIST_FAILURE';
 
 // Actions
 
 // Get list of products
 export function getList(isLoading = true) {
   return async dispatch => {
-    const CACHE_KEY = 'products'
+    const CACHE_KEY = 'products';
 
     // Use AsyncStorage to load data (avoid showing refresh, but still make API call)
     try {
-      const products = JSON.parse(await AsyncStorage.getItem(CACHE_KEY))
+      const products = JSON.parse(await AsyncStorage.getItem(CACHE_KEY));
 
-      if(products && products.length > 0) {
+      if (products && products.length > 0) {
         dispatch({
           type: PRODUCTS_GET_LIST_RESPONSE,
           error: null,
           isLoading: false,
-          list: products
-        })
+          list: products,
+        });
       } else {
         dispatch({
           type: PRODUCTS_GET_LIST_REQUEST,
           error: null,
-          isLoading
-        })
+          isLoading,
+        });
       }
-    } catch(e) {
+    } catch (e) {
       dispatch({
         type: PRODUCTS_GET_LIST_REQUEST,
         error: null,
-        isLoading
-      })
+        isLoading,
+      });
     }
 
-    return axios.post(routeApi, query({
-      operation: 'products',
-      fields: ['id', 'name', 'slug', 'description', 'image', 'createdAt', 'updatedAt']
-    }))
+    return axios
+      .post(
+        routeApi,
+        query({
+          operation: 'products',
+          fields: [
+            'id',
+            'name',
+            'slug',
+            'description',
+            'image',
+            'createdAt',
+            'updatedAt',
+          ],
+        }),
+      )
       .then(response => {
         if (response.status === 200) {
           dispatch({
             type: PRODUCTS_GET_LIST_RESPONSE,
             error: null,
             isLoading: false,
-            list: response.data.data.products
-          })
+            list: response.data.data.products,
+          });
 
-          AsyncStorage.setItem(CACHE_KEY, JSON.stringify(response.data.data.products))
+          AsyncStorage.setItem(
+            CACHE_KEY,
+            JSON.stringify(response.data.data.products),
+          );
         } else {
           dispatch({
             type: PRODUCTS_GET_LIST_FAILURE,
             error: 'Some error occurred. Please try again.',
-            isLoading: false
-          })
+            isLoading: false,
+          });
         }
       })
       .catch(error => {
         dispatch({
           type: PRODUCTS_GET_LIST_FAILURE,
           error: 'Some error occurred. Please try again.',
-          isLoading: false
-        })
-      })
-  }
+          isLoading: false,
+        });
+      });
+  };
 }
 
 // Get single product
 export function get(slug, isLoading = true) {
   return async dispatch => {
-    const CACHE_KEY = `product-${ slug }`
+    const CACHE_KEY = `product-${slug}`;
 
     // Use AsyncStorage to load data (avoid showing refresh, but still make API call)
     try {
-      const product = JSON.parse(await AsyncStorage.getItem(CACHE_KEY))
+      const product = JSON.parse(await AsyncStorage.getItem(CACHE_KEY));
 
-      if(product) {
+      if (product) {
         dispatch({
           type: PRODUCTS_GET_RESPONSE,
           error: null,
           isLoading: false,
-          item: product
-        })
+          item: product,
+        });
       } else {
         dispatch({
           type: PRODUCTS_GET_REQUEST,
-          isLoading
-        })
+          isLoading,
+        });
       }
-    } catch(e) {
+    } catch (e) {
       dispatch({
         type: PRODUCTS_GET_REQUEST,
-        isLoading
-      })
+        isLoading,
+      });
     }
 
     // API call
-    return axios.post(routeApi, query({
-      operation: 'product',
-      variables: { slug },
-      fields: ['id', 'name', 'slug', 'description', 'image', 'createdAt']
-    }))
+    return axios
+      .post(
+        routeApi,
+        query({
+          operation: 'product',
+          variables: {slug},
+          fields: ['id', 'name', 'slug', 'description', 'image', 'createdAt'],
+        }),
+      )
       .then(response => {
         if (response.status === 200) {
           if (response.data.errors && response.data.errors.length > 0) {
             dispatch({
               type: PRODUCTS_GET_FAILURE,
               error: response.data.errors[0].message,
-              isLoading: false
-            })
+              isLoading: false,
+            });
           } else {
             dispatch({
               type: PRODUCTS_GET_RESPONSE,
               error: null,
               isLoading: false,
-              item: response.data.data.product
-            })
+              item: response.data.data.product,
+            });
 
-            AsyncStorage.setItem(CACHE_KEY, JSON.stringify(response.data.data.product))
+            AsyncStorage.setItem(
+              CACHE_KEY,
+              JSON.stringify(response.data.data.product),
+            );
           }
         } else {
           dispatch({
             type: PRODUCTS_GET_FAILURE,
             error: 'Some error occurred. Please try again.',
-            isLoading: false
-          })
+            isLoading: false,
+          });
         }
       })
       .catch(error => {
         dispatch({
           type: PRODUCTS_GET_FAILURE,
           error: error,
-          isLoading: false
-        })
-      })
-  }
+          isLoading: false,
+        });
+      });
+  };
 }
 
 // Set product details temporarily before fetching through API
@@ -160,52 +185,61 @@ export function preGet(product) {
   return dispatch => {
     dispatch({
       type: PRODUCTS_PRE_GET,
-      item: product
-    })
-  }
+      item: product,
+    });
+  };
 }
 
 // Get list of products related to a product
 export function getRelatedList(productId, isLoading = true) {
   return (dispatch, getState) => {
-    let state = getState()
+    let state = getState();
 
-    if (state.productsRelated.list.length === 0 || state.productId !== productId) {
+    if (
+      state.productsRelated.list.length === 0 ||
+      state.productId !== productId
+    ) {
       dispatch({
         type: PRODUCTS_GET_RELATED_LIST_REQUEST,
         error: null,
-        isLoading
-      })
+        isLoading,
+      });
 
-      return axios.post(routeApi, query({
-        operation: 'productsRelated',
-        variables: { productId },
-        fields: ['id', 'name', 'slug', 'description', 'image']
-      }))
+      return axios
+        .post(
+          routeApi,
+          query({
+            operation: 'productsRelated',
+            variables: {productId},
+            fields: ['id', 'name', 'slug', 'description', 'image'],
+          }),
+        )
         .then(response => {
           if (response.status === 200) {
             dispatch({
               type: PRODUCTS_GET_RELATED_LIST_RESPONSE,
               error: null,
               isLoading: false,
-              list: response.data.data.productsRelated,
-              productId
-            })
+              list: response.data.data.productsRelated
+                ? response.data.data.productsRelated
+                : [],
+              productId,
+            });
           } else {
             dispatch({
               type: PRODUCTS_GET_RELATED_LIST_FAILURE,
               error: 'Some error occurred. Please try again.',
-              isLoading: false
-            })
+              isLoading: false,
+            });
           }
         })
         .catch(error => {
           dispatch({
             type: PRODUCTS_GET_RELATED_LIST_FAILURE,
             error: 'Some error occurred. Please try again.',
-            isLoading: false
-          })
-        })
+            isLoading: false,
+          });
+        });
     }
-  }
+  };
 }

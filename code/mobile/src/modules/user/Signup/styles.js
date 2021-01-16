@@ -1,18 +1,18 @@
 // Imports
-import { StyleSheet } from 'react-native'
+import {StyleSheet} from 'react-native';
 
 // UI Imports
-import { blockMargin } from '../../../ui/common/responsive'
+import {blockMargin} from '../../../ui/common/responsive';
 
 // Styles
 export default StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   buttonContainer: {
     flex: 1,
     flexDirection: 'row',
     marginTop: blockMargin * 2,
-    justifyContent: 'flex-end'
-  }
-})
+    justifyContent: 'flex-end',
+  },
+});

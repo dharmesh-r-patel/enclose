@@ -1,11 +1,11 @@
 // Imports
-import React from 'react'
-import { createStackNavigator } from 'react-navigation-stack'
+import React from 'react';
+import {createStackNavigator} from 'react-navigation-stack';
 
 // App Imports
-import { getRoutesForStack } from '../../setup/helpers'
-import Home from '../../modules/screens/Home'
-import Info from '../../modules/screens/Info'
+import {getRoutesForStack} from '../../setup/helpers';
+import Home from '../../modules/screens/Home';
+import Info from '../../modules/screens/Info';
 
 // Routes
 export const routesHome = {
@@ -20,12 +20,12 @@ export const routesHome = {
   info: {
     name: 'info',
     path: 'info',
-    screen: Info
+    screen: Info,
   },
-}
+};
 
 export default createStackNavigator(getRoutesForStack(routesHome), {
   initialRouteName: routesHome.home.name,
   headerMode: 'none',
-  navigationOptions: { headerVisible: false }
-})
+  navigationOptions: {headerVisible: false},
+});

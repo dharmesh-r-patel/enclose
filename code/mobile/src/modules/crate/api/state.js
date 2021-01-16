@@ -4,8 +4,8 @@
 import {
   CRATES_GET_LIST_REQUEST,
   CRATES_GET_LIST_RESPONSE,
-  CRATES_GET_LIST_FAILURE
-} from './actions'
+  CRATES_GET_LIST_FAILURE,
+} from './actions';
 
 // Crates list
 
@@ -13,8 +13,8 @@ import {
 const cratesInitialState = {
   isLoading: false,
   error: null,
-  list: []
-}
+  list: [],
+};
 
 // State
 export const crates = (state = cratesInitialState, action) => {
@@ -23,25 +23,25 @@ export const crates = (state = cratesInitialState, action) => {
       return {
         ...state,
         isLoading: action.isLoading,
-        error: null
-      }
+        error: null,
+      };
 
     case CRATES_GET_LIST_RESPONSE:
       return {
         ...state,
         isLoading: false,
         error: action.error,
-        list: action.list
-      }
+        list: action.list,
+      };
 
     case CRATES_GET_LIST_FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.error
-      }
+        error: action.error,
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};

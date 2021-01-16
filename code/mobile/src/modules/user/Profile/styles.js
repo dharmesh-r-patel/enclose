@@ -1,9 +1,9 @@
 // Imports
-import { StyleSheet } from 'react-native'
+import {StyleSheet} from 'react-native';
 
 // UI Imports
-import { blockMargin, font } from '../../../ui/common/responsive'
-import { grey3 } from '../../../ui/common/colors'
+import {blockMargin, font} from '../../../ui/common/responsive';
+import {grey3} from '../../../ui/common/colors';
 
 // Styles
 export default StyleSheet.create({
@@ -15,11 +15,11 @@ export default StyleSheet.create({
   },
   name: {
     fontSize: font(22),
-    marginVertical: blockMargin
+    marginVertical: blockMargin,
   },
   email: {
     fontSize: font(18),
     color: grey3,
-    marginBottom: blockMargin * 2
-  }
-})
+    marginBottom: blockMargin * 2,
+  },
+});

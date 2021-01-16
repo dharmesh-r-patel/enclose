@@ -1,9 +1,9 @@
 // Imports
-import { StyleSheet } from 'react-native'
+import {StyleSheet} from 'react-native';
 
 // UI Imports
-import { blockMarginHalf, blockPadding } from '../../../ui/common/responsive'
-import { grey3 } from '../../../ui/common/colors'
+import {blockMarginHalf, blockPadding} from '../../../ui/common/responsive';
+import {grey3} from '../../../ui/common/colors';
 
 export default StyleSheet.create({
   container: {
@@ -11,10 +11,10 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',
-    padding: blockPadding
+    padding: blockPadding,
   },
   text: {
     color: grey3,
-    marginTop: blockMarginHalf
-  }
-})
+    marginTop: blockMarginHalf,
+  },
+});

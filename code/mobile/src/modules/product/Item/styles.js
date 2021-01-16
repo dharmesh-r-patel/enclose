@@ -1,15 +1,21 @@
 // Imports
-import { StyleSheet } from 'react-native'
+import {StyleSheet} from 'react-native';
 
 // UI Imports
-import { white, grey3 } from '../../../ui/common/colors'
-import { deviceWidth, blockMargin, blockMarginHalf, blockPadding, font } from '../../../ui/common/responsive'
+import {white, grey3} from '../../../ui/common/colors';
+import {
+  deviceWidth,
+  blockMargin,
+  blockMarginHalf,
+  blockPadding,
+  font,
+} from '../../../ui/common/responsive';
 
 // Styles
-const containerWidth = deviceWidth - (blockMargin * 2)
-const containerHeight = deviceWidth + (blockMargin * 2) + 45
-const imageWidth = deviceWidth - blockMargin * 2
-const imageHeight = deviceWidth - blockMargin
+const containerWidth = deviceWidth - blockMargin * 2;
+const containerHeight = deviceWidth + blockMargin * 2 + 45;
+const imageWidth = deviceWidth - blockMargin * 2;
+const imageHeight = deviceWidth - blockMargin;
 
 export default StyleSheet.create({
   container: {
@@ -18,7 +24,7 @@ export default StyleSheet.create({
     marginHorizontal: blockMargin,
     elevation: 2,
     width: containerWidth,
-    height: containerHeight
+    height: containerHeight,
   },
   containerCompact: {
     backgroundColor: white,
@@ -26,33 +32,33 @@ export default StyleSheet.create({
     marginHorizontal: blockMargin,
     elevation: 2,
     width: containerWidth / 2,
-    height: containerHeight / 1.8
+    height: containerHeight / 1.8,
   },
   image: {
     width: imageWidth,
-    height: imageHeight
+    height: imageHeight,
   },
   imageCompact: {
     width: imageWidth / 2,
-    height: imageHeight / 2
+    height: imageHeight / 2,
   },
   textContainer: {
-    padding: blockPadding
+    padding: blockPadding,
   },
   title: {
-    fontSize: font(22)
+    fontSize: font(22),
   },
   titleCompact: {
-    fontSize: font(18)
+    fontSize: font(18),
   },
   description: {
     marginTop: blockMarginHalf,
     color: grey3,
-    fontSize: font(16)
+    fontSize: font(16),
   },
   descriptionCompact: {
     marginTop: blockMarginHalf,
     color: grey3,
-    fontSize: font(14)
-  }
-})
+    fontSize: font(14),
+  },
+});

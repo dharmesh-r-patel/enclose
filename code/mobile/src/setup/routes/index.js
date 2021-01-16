@@ -1,25 +1,25 @@
 // Imports
-import React from 'react'
-import { createAppContainer } from 'react-navigation'
-import { createBottomTabNavigator } from 'react-navigation-tabs'
+import React from 'react';
+import {createAppContainer} from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 // UI Imports
-import { font, scalable } from '../../ui/common/responsive'
-import { primary, grey2, white } from '../../ui/common/colors'
-import Icon from '../../ui/icon/Icon'
+import {font, scalable} from '../../ui/common/responsive';
+import {primary, grey2, white} from '../../ui/common/colors';
+import Icon from '../../ui/icon/Icon';
 
 // App Imports
-import config from '../../setup/config'
-import { getRoutesForStack } from '../../setup/helpers'
-import Crates from '../../modules/screens/Crates'
-import Account from '../../modules/screens/Account'
-import HomeStack from './home'
-import ProductStack from './product'
+import config from '../../setup/config';
+import {getRoutesForStack} from '../../setup/helpers';
+import Crates from '../../modules/screens/Crates';
+import Account from '../../modules/screens/Account';
+import HomeStack from './home';
+import ProductStack from './product';
 
 // API
-export const routeApi = config.url.api
+export const routeApi = config.url.api;
 
-export const routeImage = routeApi
+export const routeImage = routeApi;
 
 export const routes = {
   home: {
@@ -28,12 +28,10 @@ export const routes = {
     screen: HomeStack,
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: ({ tintColor }) => <Icon
-        name={'home'}
-        size={font(23)}
-        color={tintColor}
-      />,
-    }
+      tabBarIcon: ({tintColor}) => (
+        <Icon name={'home'} size={font(23)} color={tintColor} />
+      ),
+    },
   },
 
   crates: {
@@ -42,12 +40,10 @@ export const routes = {
     screen: Crates,
     navigationOptions: {
       tabBarLabel: 'Crates',
-      tabBarIcon: ({ tintColor }) => <Icon
-        name={'shopping-basket'}
-        size={font(23)}
-        color={tintColor}
-      />,
-    }
+      tabBarIcon: ({tintColor}) => (
+        <Icon name={'shopping-basket'} size={font(23)} color={tintColor} />
+      ),
+    },
   },
 
   whatsNew: {
@@ -56,12 +52,10 @@ export const routes = {
     screen: ProductStack,
     navigationOptions: {
       tabBarLabel: 'Whats New',
-      tabBarIcon: ({ tintColor }) => <Icon
-        name={'whatshot'}
-        size={font(23)}
-        color={tintColor}
-      />,
-    }
+      tabBarIcon: ({tintColor}) => (
+        <Icon name={'whatshot'} size={font(23)} color={tintColor} />
+      ),
+    },
   },
 
   account: {
@@ -70,35 +64,33 @@ export const routes = {
     screen: Account,
     navigationOptions: {
       tabBarLabel: 'Account',
-      tabBarIcon: ({ tintColor }) => <Icon
-        name={'account-circle'}
-        size={font(23)}
-        color={tintColor}
-      />,
-    }
-  }
-}
+      tabBarIcon: ({tintColor}) => (
+        <Icon name={'account-circle'} size={font(23)} color={tintColor} />
+      ),
+    },
+  },
+};
 
 const AppNavigator = createBottomTabNavigator(getRoutesForStack(routes), {
   initialRouteName: routes.home.name,
-  navigationOptions: { tabBarVisible: true },
+  navigationOptions: {tabBarVisible: true},
   tabBarOptions: {
     activeTintColor: primary,
     inactiveTintColor: grey2,
     style: {
       backgroundColor: white,
       paddingVertical: scalable(5),
-      height: scalable(55)
+      height: scalable(55),
     },
     tabStyle: {
       flexDirection: 'column',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     labelStyle: {
-      marginLeft: 0
-    }
-  }
-})
+      marginLeft: 0,
+    },
+  },
+});
 
-export default createAppContainer(AppNavigator)
+export default createAppContainer(AppNavigator);

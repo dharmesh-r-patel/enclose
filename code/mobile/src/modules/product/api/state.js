@@ -10,8 +10,8 @@ import {
   PRODUCTS_GET_FAILURE,
   PRODUCTS_GET_RELATED_LIST_REQUEST,
   PRODUCTS_GET_RELATED_LIST_RESPONSE,
-  PRODUCTS_GET_RELATED_LIST_FAILURE
-} from './actions'
+  PRODUCTS_GET_RELATED_LIST_FAILURE,
+} from './actions';
 
 // Product list
 
@@ -19,8 +19,8 @@ import {
 const productsInitialState = {
   isLoading: false,
   error: null,
-  list: []
-}
+  list: [],
+};
 
 // State
 export const products = (state = productsInitialState, action) => {
@@ -29,32 +29,31 @@ export const products = (state = productsInitialState, action) => {
       return {
         ...state,
         isLoading: action.isLoading,
-        error: null
-      }
+        error: null,
+      };
 
     case PRODUCTS_GET_LIST_RESPONSE:
       return {
         ...state,
         isLoading: false,
         error: action.error,
-        list: action.list
-      }
+        list: action.list,
+      };
 
     case PRODUCTS_GET_LIST_FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.error
-      }
+        error: action.error,
+      };
 
     case PRODUCTS_GET_LIST_RESET:
-      return Object.assign({}, productsInitialState)
+      return Object.assign({}, productsInitialState);
 
     default:
-      return state
+      return state;
   }
-}
-
+};
 
 // Single product
 
@@ -62,8 +61,8 @@ export const products = (state = productsInitialState, action) => {
 const productInitialState = {
   isLoading: false,
   error: null,
-  item: {}
-}
+  item: {},
+};
 
 // State
 export const product = (state = productInitialState, action) => {
@@ -71,36 +70,35 @@ export const product = (state = productInitialState, action) => {
     case PRODUCTS_PRE_GET:
       return {
         ...state,
-        item: action.item
-      }
+        item: action.item,
+      };
 
     case PRODUCTS_GET_REQUEST:
       return {
         ...state,
         isLoading: action.isLoading,
-        error: null
-      }
+        error: null,
+      };
 
     case PRODUCTS_GET_RESPONSE:
       return {
         ...state,
         isLoading: false,
         error: action.error,
-        item: action.item
-      }
+        item: action.item,
+      };
 
     case PRODUCTS_GET_FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.error
-      }
+        error: action.error,
+      };
 
     default:
-      return state
+      return state;
   }
-}
-
+};
 
 // Product Related list
 
@@ -109,18 +107,21 @@ const productsRelatedInitialState = {
   isLoading: false,
   error: null,
   list: [],
-  productId: 0
-}
+  productId: 0,
+};
 
 // State
-export const productsRelated = (state = productsRelatedInitialState, action) => {
+export const productsRelated = (
+  state = productsRelatedInitialState,
+  action,
+) => {
   switch (action.type) {
     case PRODUCTS_GET_RELATED_LIST_REQUEST:
       return {
         ...state,
         isLoading: action.isLoading,
-        error: null
-      }
+        error: null,
+      };
 
     case PRODUCTS_GET_RELATED_LIST_RESPONSE:
       return {
@@ -128,18 +129,17 @@ export const productsRelated = (state = productsRelatedInitialState, action) => 
         isLoading: false,
         error: action.error,
         list: action.list,
-        productId: action.productId
-      }
+        productId: action.productId,
+      };
 
     case PRODUCTS_GET_RELATED_LIST_FAILURE:
       return {
         ...state,
         isLoading: false,
-        error: action.error
-      }
+        error: action.error,
+      };
 
     default:
-      return state
+      return state;
   }
-}
-
+};

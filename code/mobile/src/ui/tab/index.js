@@ -1,5 +1,5 @@
 // UI Imports
-import TabBar from './TabBar'
-import TabContent from './TabContent'
+import TabBar from './TabBar';
+import TabContent from './TabContent';
 
-export { TabBar, TabContent }
+export {TabBar, TabContent};

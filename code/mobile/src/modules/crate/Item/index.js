@@ -1,90 +1,95 @@
 // Imports
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Text, View, Image } from 'react-native'
-import { withNavigation } from 'react-navigation'
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Text, View, Image} from 'react-native';
+import {withNavigation} from 'react-navigation';
 
 // Assets
-import crateImage from '../../../../assets/images/crate.png'
+import crateImage from '../../../../assets/images/crate.png';
 
 // UI Imports
-import { blockMargin } from '../../../ui/common/responsive'
-import { primary } from '../../../ui/common/colors'
-import Button from '../../../ui/button/Button'
-import styles from './styles'
+import {blockMargin} from '../../../ui/common/responsive';
+import {primary} from '../../../ui/common/colors';
+import Button from '../../../ui/button/Button';
+import styles from './styles';
 
 // App Imports
-import config from '../../../setup/config'
-import { create as createSubscription } from '../../subscription/api/actions'
-import { messageShow, messageHide } from '../../common/api/actions'
+import config from '../../../setup/config';
+import {create as createSubscription} from '../../subscription/api/actions';
+import {messageShow, messageHide} from '../../common/api/actions';
 
 // Component
 class Item extends PureComponent {
-
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      isLoading: false
-    }
+      isLoading: false,
+    };
   }
 
   #loading = isLoading => {
     this.setState({
-      isLoading
-    })
-  }
+      isLoading,
+    });
+  };
 
   #subscribe = () => {
-    const { user, onSuccessSubscription, dispatch } = this.props
+    const {user, onSuccessSubscription, dispatch} = this.props;
 
-    if(user.isAuthenticated) {
-      const { crate } = this.props
+    if (user.isAuthenticated) {
+      const {crate} = this.props;
 
-      this.#loading(true)
+      this.#loading(true);
 
-      dispatch(messageShow('Subscribing, please wait...'))
+      dispatch(messageShow('Subscribing, please wait...'));
 
       dispatch(createSubscription({crateId: crate.id}))
         .then(response => {
-          this.#loading(false)
-          
+          this.#loading(false);
+
           if (response.data.errors && response.data.errors.length > 0) {
-            dispatch(messageShow(response.data.errors[0].message))
-
+            dispatch(messageShow(response.data.errors[0].message));
           } else {
-            dispatch(messageShow('Subscribed successfully.'))
+            dispatch(messageShow('Subscribed successfully.'));
 
-            onSuccessSubscription()
+            onSuccessSubscription();
           }
         })
         .catch(() => {
-          dispatch(messageShow('There was some error subscribing to this crate. Please try again.'))
+          dispatch(
+            messageShow(
+              'There was some error subscribing to this enclose. Please try again.',
+            ),
+          );
 
-          this.#loading(false)
+          this.#loading(false);
         })
         .then(() => {
           setTimeout(() => {
-            dispatch(messageHide())
-          }, config.message.error.timers.long)
-        })
+            dispatch(messageHide());
+          }, config.message.error.timers.long);
+        });
     } else {
-      messageShow('You need to be signed in before you can subscribe to crate.')
+      messageShow(
+        'You need to be signed in before you can subscribe to enclose.',
+      );
 
       setTimeout(() => {
-        dispatch(messageHide())
-      }, config.message.error.timers.long)
+        dispatch(messageHide());
+      }, config.message.error.timers.long);
     }
-  }
+  };
 
   render() {
-    const { crate, lastItem } = this.props
-    const { name, description } = crate
-    const { isLoading } = this.state
+    const {crate, lastItem} = this.props;
+    const {name, description} = crate;
+    const {isLoading} = this.state;
 
     return (
-      <View style={[styles.container, { marginBottom: (lastItem ? blockMargin : 0) } ]}>
+      <View
+        style={[styles.container, {marginBottom: lastItem ? blockMargin : 0}]}>
         <View style={styles.imageContainer}>
           <Image
             source={crateImage}
@@ -95,11 +100,11 @@ class Item extends PureComponent {
 
         <View style={styles.textContainer}>
           <Text numberOfLines={2} style={styles.title}>
-            { name }
+            {name}
           </Text>
 
           <Text numberOfLines={2} style={styles.description}>
-            { description }
+            {description}
           </Text>
 
           <Button
@@ -111,20 +116,20 @@ class Item extends PureComponent {
           />
         </View>
       </View>
-    )
+    );
   }
 }
 
 // Component Properties
 Item.propTypes = {
-  user: PropTypes.object.isRequired
-}
+  user: PropTypes.object.isRequired,
+};
 
 // Component State
 function itemState(state) {
   return {
-    user: state.user
-  }
+    user: state.user,
+  };
 }
 
-export default connect(itemState)(withNavigation(Item))
+export default connect(itemState)(withNavigation(Item));

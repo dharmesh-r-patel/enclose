@@ -1,28 +1,28 @@
 // Imports
-import React from 'react'
-import { StyleSheet, TextInput, Platform } from 'react-native'
+import React from 'react';
+import {StyleSheet, TextInput, Platform} from 'react-native';
 
 // UI Imports
-import { scalable, blockPaddingHalf, font } from '../common/responsive'
-import { grey1, grey2 } from '../common/colors'
+import {scalable, blockPaddingHalf, font} from '../common/responsive';
+import {grey1, grey2} from '../common/colors';
 
 // Component
-const InputText = ({ onSubmitEditing, inputRef, ...props}) => {
-  return(
+const InputText = ({onSubmitEditing, inputRef, ...props}) => {
+  return (
     <TextInput
       ref={inputRef ? ref => inputRef(ref) : null}
       onSubmitEditing={() => {
-        if (onSubmitEditing) onSubmitEditing()
+        if (onSubmitEditing) onSubmitEditing();
       }}
       placeholderTextColor={grey2}
       underlineColorAndroid={grey2}
       style={styles.container}
       {...props}
     />
-  )
-}
+  );
+};
 
-export default InputText
+export default InputText;
 
 // Component Styles
 const styles = StyleSheet.create({
@@ -33,6 +33,6 @@ const styles = StyleSheet.create({
     fontSize: font(18),
     height: scalable(48),
     borderBottomWidth: Platform.OS === 'android' ? 0 : 1,
-    borderColor: grey1
-  }
-})
+    borderColor: grey1,
+  },
+});

@@ -1,28 +1,33 @@
 // Imports
-import React from 'react'
-import PropTypes from 'prop-types'
-import { StyleSheet, View, Text } from 'react-native'
+import React from 'react';
+import PropTypes from 'prop-types';
+import {StyleSheet, View, Text} from 'react-native';
 
 // UI Imports
-import { blockPadding, itemSpacing, itemRadius, font } from '../common/responsive'
-import { white, black } from '../common/colors'
-import Touchable from '../touchable/Touchable'
+import {
+  blockPadding,
+  itemSpacing,
+  itemRadius,
+  font,
+} from '../common/responsive';
+import {white, black} from '../common/colors';
+import Touchable from '../touchable/Touchable';
 
 // Component
-const Toast = (props) => (
+const Toast = props => (
   <Touchable onPress={props.onPress}>
     <View style={styles.container}>
-      <Text style={styles.text}>{ props.message }</Text>
+      <Text style={styles.text}>{props.message}</Text>
     </View>
   </Touchable>
-)
+);
 
 // Component Properties
 Toast.propTypes = {
-  message: PropTypes.string
-}
+  message: PropTypes.string,
+};
 
-export default Toast
+export default Toast;
 
 // Component Styles
 const styles = StyleSheet.create({
@@ -35,11 +40,11 @@ const styles = StyleSheet.create({
     right: itemSpacing,
     padding: blockPadding,
     borderRadius: itemRadius,
-    elevation: 6
+    elevation: 6,
   },
   text: {
     fontSize: font(16),
     textAlign: 'center',
-    color: white
-  }
-})
+    color: white,
+  },
+});

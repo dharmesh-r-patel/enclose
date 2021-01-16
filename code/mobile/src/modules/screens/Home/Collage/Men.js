@@ -1,19 +1,19 @@
 // Imports
-import React from 'react'
-import PropTypes  from 'prop-types'
-import { Text, View, Image } from 'react-native'
+import React from 'react';
+import PropTypes from 'prop-types';
+import {Text, View, Image} from 'react-native';
 
 // Assets
-import men1Image from '../../../../../assets/images/stock/men/1.jpg'
-import men2Image from '../../../../../assets/images/stock/men/2.jpg'
-import men3Image from '../../../../../assets/images/stock/men/3.jpg'
+import men1Image from '../../../../../assets/images/stock/men/1.jpg';
+import men2Image from '../../../../../assets/images/stock/men/2.jpg';
+import men3Image from '../../../../../assets/images/stock/men/3.jpg';
 
 // UI Imports
-import Button from '../../../../ui/button/Button'
-import styles from './styles'
+import Button from '../../../../ui/button/Button';
+import styles from './styles';
 
 // Component
-const CollageMen = (props) => (
+const CollageMen = props => (
   <View style={styles.container}>
     <View style={styles.imagesContainer}>
       <View>
@@ -44,12 +44,13 @@ const CollageMen = (props) => (
     </View>
 
     <View style={styles.titleContainer}>
-      <Text style={styles.title}>MONTHLY CRATES FOR MEN</Text>
+      <Text style={styles.title}>MONTHLY ENCLOSE FOR MEN</Text>
     </View>
 
     <View style={styles.content}>
       <Text style={styles.description}>
-        Save time. Look great. The personal styling service customized to your fit, lifestyle & spending preferences.
+        Save time. Look great. The personal styling service customized to your
+        fit, lifestyle & spending preferences.
       </Text>
 
       <Button
@@ -60,11 +61,11 @@ const CollageMen = (props) => (
       />
     </View>
   </View>
-)
+);
 
 // Component Properties
 CollageMen.propTypes = {
-  getSubscription: PropTypes.func.isRequired
-}
+  getSubscription: PropTypes.func.isRequired,
+};
 
-export default CollageMen
+export default CollageMen;

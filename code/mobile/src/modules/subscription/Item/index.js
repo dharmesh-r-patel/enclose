@@ -1,89 +1,91 @@
 // Imports
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Text, View, Image, Alert } from 'react-native'
+import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {Text, View, Image, Alert} from 'react-native';
 
 // Assets
-import crateImage from '../../../../assets/images/crate.png'
+import crateImage from '../../../../assets/images/crate.png';
 
 // UI Imports
-import { blockMargin } from '../../../ui/common/responsive'
-import Button from '../../../ui/button/Button'
-import styles from './styles'
+import {blockMargin} from '../../../ui/common/responsive';
+import Button from '../../../ui/button/Button';
+import styles from './styles';
 
 // App Imports
-import config from '../../../setup/config'
-import { remove } from '../../subscription/api/actions'
-import { messageShow, messageHide } from '../../common/api/actions'
+import config from '../../../setup/config';
+import {remove} from '../../subscription/api/actions';
+import {messageShow, messageHide} from '../../common/api/actions';
 
 // Component
 class Item extends PureComponent {
-
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      isLoading: false
-    }
+      isLoading: false,
+    };
   }
 
-  loading = (isLoading) => {
+  loading = isLoading => {
     this.setState({
-      isLoading
-    })
-  }
+      isLoading,
+    });
+  };
 
   unsubscribeCheck = () => {
     Alert.alert(
       'Unsubscribe',
-      'Are you sure you want to stop receiving this crate?',
+      'Are you sure you want to stop receiving this enclose?',
       [
-        { text: 'KEEP RECEIVING', onPress: () => {} },
-        { text: 'UNSUBSCRIBE', onPress: this.unsubscribe }
+        {text: 'KEEP RECEIVING', onPress: () => {}},
+        {text: 'UNSUBSCRIBE', onPress: this.unsubscribe},
       ],
-      { cancelable: true }
-    )
-  }
+      {cancelable: true},
+    );
+  };
 
   unsubscribe = () => {
-    const { subscription, onSuccessUnsubscribe, dispatch } = this.props
+    const {subscription, onSuccessUnsubscribe, dispatch} = this.props;
 
-    this.loading(true)
+    this.loading(true);
 
-    dispatch(messageShow('Unsubscribing, please wait...'))
+    dispatch(messageShow('Unsubscribing, please wait...'));
 
-    dispatch(remove({ id: subscription.id }))
+    dispatch(remove({id: subscription.id}))
       .then(response => {
         if (response.data.errors && response.data.errors.length > 0) {
-          dispatch(messageShow(response.data.errors[0].message))
+          dispatch(messageShow(response.data.errors[0].message));
 
-          this.loading(false)
+          this.loading(false);
         } else {
-          dispatch(messageShow('Unsubscribed successfully.'))
+          dispatch(messageShow('Unsubscribed successfully.'));
 
-          onSuccessUnsubscribe()
+          onSuccessUnsubscribe();
         }
       })
       .catch(() => {
-        dispatch(messageShow('There was some error unsubscribing. Please try again.'))
+        dispatch(
+          messageShow('There was some error unsubscribing. Please try again.'),
+        );
 
-        this.loading(false)
+        this.loading(false);
       })
       .then(() => {
         setTimeout(() => {
-          dispatch(messageHide())
-        }, config.message.error.timers.long)
-      })
-  }
+          dispatch(messageHide());
+        }, config.message.error.timers.long);
+      });
+  };
 
   render() {
-    const { subscription, lastItem } = this.props
-    const { crate, createdAt } = subscription
-    const { isLoading } = this.state
+    const {subscription, lastItem} = this.props;
+    const {crate, createdAt} = subscription;
+    const {isLoading} = this.state;
 
     return (
-      <View style={[styles.container, { marginBottom: (lastItem ? 0 : blockMargin) }]}>
+      <View
+        style={[styles.container, {marginBottom: lastItem ? 0 : blockMargin}]}>
         <View style={styles.imageContainer}>
           <Image
             source={crateImage}
@@ -94,15 +96,15 @@ class Item extends PureComponent {
 
         <View style={styles.textContainer}>
           <Text numberOfLines={2} style={styles.title}>
-            { crate.name }
+            {crate.name}
           </Text>
 
           <Text numberOfLines={2} style={styles.description}>
-            { crate.description }
+            {crate.description}
           </Text>
 
           <Text numberOfLines={2} style={styles.description}>
-            Subscribed on { new Date(createdAt).toDateString() }
+            Subscribed on {new Date(createdAt).toDateString()}
           </Text>
 
           <Button
@@ -114,13 +116,13 @@ class Item extends PureComponent {
           />
         </View>
       </View>
-    )
+    );
   }
 }
 
 // Component Properties
 Item.propTypes = {
-  subscription: PropTypes.object.isRequired
-}
+  subscription: PropTypes.object.isRequired,
+};
 
-export default connect()(Item)
+export default connect()(Item);

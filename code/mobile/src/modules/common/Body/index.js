@@ -1,29 +1,24 @@
 // Imports
-import React from 'react'
-import { View, StatusBar } from 'react-native'
-import { SafeAreaView } from 'react-navigation'
+import React from 'react';
+import {View, StatusBar} from 'react-native';
+import {SafeAreaView} from 'react-navigation';
 
 // UI Imports
-import { white, primary } from '../../../ui/common/colors'
-import styles from './styles'
+import {white, primary} from '../../../ui/common/colors';
+import styles from './styles';
 
 // App Imports
-import Message from '../Message'
+import Message from '../Message';
 
 // Component
-const Body = ({ children }) => (
+const Body = ({children}) => (
   <SafeAreaView style={styles.container}>
-    <StatusBar
-      barStyle={'light-content'}
-      backgroundColor={primary}
-    />
+    <StatusBar barStyle={'light-content'} backgroundColor={primary} />
 
-    <View style={styles.content}>
-      { children }
-    </View>
+    <View style={styles.content}>{children}</View>
 
     <Message />
   </SafeAreaView>
-)
+);
 
-export default Body
+export default Body;
